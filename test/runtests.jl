@@ -177,4 +177,6 @@ if selected("phylogeny-model") || selected("all")
     println("VERIFY_PHYLOGENY_MODEL_OK")
 end
 
-requested in ("all","bcg-models","bcg-edges","bcg-adapters","phylogeny-model") || error("unknown test group: $requested")
+include("dependent.jl")
+
+requested in ("all","bcg-models","bcg-edges","bcg-adapters","phylogeny-model","dependent-model","dependent-edges") || error("unknown test group: $requested")

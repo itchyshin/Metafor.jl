@@ -3,6 +3,7 @@ makedocs(
     sitename="Metafor.jl",
     modules=[Metafor],
     remotes=Dict("." => (Documenter.Remotes.GitHub("itchyshin", "Metafor.jl"), "main")),
-    pages=["Home"=>"index.md", "BCG example"=>"bcg.md"],
+    pages=["Home"=>"index.md", "BCG example"=>"bcg.md",
+           "Dependent effects"=>"dependent.md"],
 )
 println("DOCUMENTATION_BUILD_OK")

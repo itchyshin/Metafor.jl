@@ -4,9 +4,12 @@ using LinearAlgebra
 using Statistics
 using StatsModels
 using Tables
+using Distributions
+using Optim
 
 export MetaResult, PredictionResult, TableMetaResult, escalc_rr, fit_meta,
-       fit_meta_formula, fit_phylo, predict, forest_plot_data
+       fit_meta_formula, fit_meta_cov_formula, fit_phylo, fit_meta_cov, fit_meta_nested, fit_meta_un,
+       DependentMetaResult, predict, forest_plot_data
 
 struct MetaResult{T<:AbstractFloat}
     beta::Vector{T}
@@ -352,5 +355,7 @@ function fit_phylo(yi, vi, species, correlation, correlation_labels; X=nothing, 
     beta,cov,q,_ = at(tau)
     MetaResult(beta,cov,tau,q,NaN,NaN,true,meth,rows)
 end
+
+include("dependent.jl")
 
 end
