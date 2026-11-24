@@ -1,0 +1,6 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Metafor = "94b5b9b2-21e4-4a7e-a252-f6a872564a31"
+
+[sources]
+Metafor = {path = ".."}
