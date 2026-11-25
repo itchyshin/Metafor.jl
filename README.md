@@ -22,7 +22,7 @@ The tutorial overview lists the focused `--case` commands. Running these scripts
 
 The [BCG comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/bcg-comparison.html), [dependent-effects comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/dependent-comparison.html), [phylogenetic comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/phylogeny-comparison.html), [effect-size comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/effect-size-comparison.html), and [table-adapter comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/table-adapter-comparison.html) show results across the supported fixtures. Fixture provenance and checksums live under [`reference/`](reference/).
 
-GitHub Actions checks documentation builds from `main`. GitHub Pages serves the static site from the `gh-pages` branch; the source tutorials and package code remain on `main`.
+GitHub Actions checks documentation builds from `main`. GitHub Pages serves the generated static site from the `gh-pages` branch; tutorial sources and package code remain on `main`.
 
 Build the documentation locally:
 
@@ -30,7 +30,7 @@ Build the documentation locally:
 julia --project=docs docs/make.jl
 ```
 
-Open `docs/build/index.html` after the build. The [GitHub Pages workflow](.github/workflows/pages.yml) builds this documentation from the repository and deploys it from `main`.
+Open `docs/build/index.html` after the build. The published site is generated from this build and served from the repository's `gh-pages` branch.
 
 ## What the project covers
 
@@ -49,4 +49,4 @@ Project-intended maintainers: Shinichi Nakagawa, Yefeng Yang, and Wolfgang Viech
 
 ## License and status
 
-This repository is experimental and unreleased. See [`LICENSE`](LICENSE) and each fixture's provenance record for license and data terms. The documentation site is published from `main`; no package release has been made.
+This repository is experimental and unreleased. See [`LICENSE`](LICENSE) and each fixture's provenance record for license and data terms. The documentation site is served from `gh-pages`; no package release has been made.
