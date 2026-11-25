@@ -2,7 +2,7 @@
 
 Each tutorial asks a question, introduces the fixture and model, then interprets the results. The examples use native Julia package functions. Matching Python cases are in the `metafor-py` checkout.
 
-Run `julia --project=. -e 'using Pkg; Pkg.instantiate()'` once to install dependencies. Comparison artifacts are local files in `examples/` and have not been deployed.
+Run `julia --project=. -e 'using Pkg; Pkg.instantiate()'` once to install dependencies. Comparison artifacts are generated in `examples/` and copied into the built site.
 
 | Page | Question | Runnable Julia command | Comparison |
 |---|---|---|---|
@@ -22,6 +22,7 @@ Run `julia --project=. -e 'using Pkg; Pkg.instantiate()'` once to install depend
 | [Choosing a scale](effect-scale.md) | Why do effect magnitudes differ by scale? | `julia --project=. examples/effect-sizes.jl --case=scale` | [R, Julia, Python](../assets/generated/comparisons/effect-size-comparison.html) |
 | [Zero-cell policies](zero-cell-policies.md) | How do correction choices change results? | `julia --project=. examples/effect-sizes.jl --case=zero-correction` | [R, Julia, Python](../assets/generated/comparisons/effect-size-comparison.html) |
 | [Missing observations](missing-rows.md) | Are incomplete studies kept aligned? | `julia --project=. examples/effect-sizes.jl --case=missing` | [R, Julia, Python](../assets/generated/comparisons/effect-size-comparison.html) |
+| [Table and formula adapter](table-adapter.md) | Does a missing moderator row stay aligned across inputs? | `julia --project=. examples/bcg.jl --case=table-adapter` | [Python, Julia](../assets/generated/comparisons/table-adapter-comparison.html) |
 | [Pooling log odds ratios](odds-ratio-models.md) | How do FE and REML summaries differ? | `julia --project=. examples/effect-sizes.jl --case=odds-ratio` | [R, Julia, Python](../assets/generated/comparisons/effect-size-comparison.html) |
 | [Pooling risk differences](risk-difference-models.md) | How does heterogeneity look on an absolute scale? | `julia --project=. examples/effect-sizes.jl --case=risk-difference` | [R, Julia, Python](../assets/generated/comparisons/effect-size-comparison.html) |
 | [Phylogenetic boundary](phylo-boundary.md) | What does a zero variance boundary mean? | `julia --project=. examples/phylogeny.jl --case=boundary` | [R, Julia, Python](../assets/generated/comparisons/phylogeny-comparison.html) |
@@ -30,6 +31,6 @@ Run `julia --project=. -e 'using Pkg; Pkg.instantiate()'` once to install depend
 Omit `--case` from the BCG or dependent command to regenerate the complete comparison outputs. The phylogenetic commands exercise separate zero-boundary and interior variance cases.
 
 ```@contents
-Pages = ["bcg-effects.md", "bcg-models.md", "bcg-moderator.md", "bcg-prediction.md", "bcg-forest.md", "dependent-gls.md", "dependent-nested.md", "dependent-bivariate.md", "phylogeny.md", "differences.md", "odds-ratio.md", "risk-difference.md", "effect-scale.md", "zero-cell-policies.md", "missing-rows.md", "odds-ratio-models.md", "risk-difference-models.md", "phylo-boundary.md", "phylo-interior.md", "phylo-labels.md"]
+Pages = ["bcg-effects.md", "bcg-models.md", "bcg-moderator.md", "bcg-prediction.md", "bcg-forest.md", "dependent-gls.md", "dependent-nested.md", "dependent-bivariate.md", "phylogeny.md", "differences.md", "odds-ratio.md", "risk-difference.md", "effect-scale.md", "zero-cell-policies.md", "missing-rows.md", "odds-ratio-models.md", "risk-difference-models.md", "phylo-boundary.md", "phylo-interior.md", "phylo-labels.md", "table-adapter.md"]
 Depth = 1
 ```

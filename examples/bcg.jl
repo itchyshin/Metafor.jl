@@ -2,10 +2,11 @@ using Metafor
 using DelimitedFiles
 using LinearAlgebra
 using Printf
+using StatsModels: @formula
 
 case_arg = findfirst(arg -> startswith(arg, "--case="), ARGS)
 case = case_arg === nothing ? "all" : split(ARGS[case_arg], "=", limit=2)[2]
-case in ("all", "effects", "models", "moderator", "prediction", "forest") || error("unknown --case=$case")
+case in ("all", "effects", "models", "moderator", "prediction", "forest", "table-adapter") || error("unknown --case=$case")
 root = normpath(joinpath(@__DIR__, ".."))
 raw, header = readdlm(joinpath(root, "reference/v1/bcg.csv"), ',', Any, '\n'; header=true)
 header = String.(vec(header))
@@ -13,6 +14,28 @@ column(name) = [row[findfirst(==(name), header)] for row in eachrow(raw)]
 numeric(name) = Float64.(column(name))
 yi, vi = escalc_rr(numeric("tpos"), numeric("tneg"), numeric("cpos"), numeric("cneg"))
 latitude = numeric("ablat")
+if case == "table-adapter"
+    trials = Int.(numeric("trial"))
+    table_latitude = Union{Missing,Float64}[latitude...]
+    table_latitude[4] = missing
+    table = (yi=yi,vi=vi,ablat=table_latitude,trial=trials)
+    formula_fit = fit_meta_formula(table,@formula(yi ~ 1 + ablat);id=:trial)
+    keep = .!ismissing.(table_latitude)
+    design = hcat(ones(sum(keep)),Float64.(table_latitude[keep]))
+    matrix_fit = fit_meta(yi[keep],vi[keep];X=design)
+    max_diff = maximum(abs.(formula_fit.result.beta .- matrix_fit.beta))
+    formula_fit.row_ids == Any[trials[i] for i in findall(keep)] || error("table adapter changed row identity")
+    max_diff <= 1e-12 || error("table adapter disagrees with matrix input: $max_diff")
+    fmt(values) = join((@sprintf("%.16g",value) for value in values),",")
+    println("TABLE_ADAPTER|design_columns|$(join(formula_fit.design_columns,','))")
+    println("TABLE_ADAPTER|row_ids|$(join(formula_fit.row_ids,','))")
+    println("TABLE_ADAPTER|design_shape|$(size(design,1)),$(size(design,2))")
+    println("TABLE_ADAPTER|design_values|$(fmt(vec(permutedims(design))))")
+    println("TABLE_ADAPTER|beta|$(fmt(formula_fit.result.beta))")
+    println("TABLE_ADAPTER|matrix_max_abs_diff|$(@sprintf("%.16g",max_diff))")
+    println("TABLE_ADAPTER_OK")
+    exit(0)
+end
 labels = string.(column("author"))
 designs = (fixed=ones(length(yi),1),random=ones(length(yi),1),
            latitude=hcat(ones(length(latitude)),latitude))

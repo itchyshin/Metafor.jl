@@ -4,11 +4,11 @@ Metafor.jl is an experimental Julia port of selected methods from Wolfgang Viech
 
 The project follows the R package's question-to-analysis path: calculate study effects, fit a model, interpret uncertainty, and inspect plots. Its core uses native Julia arrays and structured results, with table and formula adapters built around explicit design matrices.
 
-The tutorials use pinned R reference inputs shared with [metafor-py](https://github.com/itchyshin/metafor-py). Their wording and plots are original. The [BCG](assets/generated/comparisons/bcg-comparison.html), [dependent-effects](assets/generated/comparisons/dependent-comparison.html), [phylogenetic](assets/generated/comparisons/phylogeny-comparison.html), and [effect-size](assets/generated/comparisons/effect-size-comparison.html) comparison pages show R, Julia, and Python results side by side.
+The tutorials use pinned R reference inputs shared with [metafor-py](https://github.com/itchyshin/metafor-py). Their wording and plots are original. The [BCG](assets/generated/comparisons/bcg-comparison.html), [dependent-effects](assets/generated/comparisons/dependent-comparison.html), [phylogenetic](assets/generated/comparisons/phylogeny-comparison.html), and [effect-size](assets/generated/comparisons/effect-size-comparison.html) comparison pages show R, Julia, and Python results side by side. A separate [table-adapter comparison](assets/generated/comparisons/table-adapter-comparison.html) checks row alignment and numeric design matrices in Julia and Python.
 
 ## Start with an analysis
 
-Follow 20 focused tutorials from raw study counts to effect sizes, pooled models, a latitude moderator, predictions, and forest-plot data. Continue to correlated and nested effects, two outcomes, and supplied-correlation phylogenetic examples. Each topic page includes a runnable command and interpretation. Start at the [tutorial overview](tutorials/index.md). Install dependencies from the checkout with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`; the package remains experimental and unregistered.
+Follow 21 focused tutorials from raw study counts to effect sizes, pooled models, a latitude moderator, predictions, and forest-plot data. Continue to correlated and nested effects, two outcomes, and supplied-correlation phylogenetic examples. Each topic page includes a runnable command and interpretation. Start at the [tutorial overview](tutorials/index.md). Install dependencies from the checkout with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`; the package remains experimental and unregistered.
 
 ## Choose a starting point
 
@@ -17,6 +17,7 @@ Follow 20 focused tutorials from raw study counts to effect sizes, pooled models
 | Analyze two-group counts | [BCG effect sizes](tutorials/bcg-effects.md) |
 | Model dependent outcomes | [Correlated sampling errors](tutorials/dependent-gls.md) |
 | Use a species correlation | [Supplied phylogenetic correlation](tutorials/phylogeny.md) |
+| Keep formula and matrix rows aligned | [Table and formula adapter](tutorials/table-adapter.md) |
 
 
 !!! note "Experimental status"

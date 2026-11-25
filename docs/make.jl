@@ -10,6 +10,7 @@ for (source, target) in [
     ("examples/dependent-comparison.html", "comparisons/dependent-comparison.html"),
     ("examples/phylogeny-comparison.html", "comparisons/phylogeny-comparison.html"),
     ("examples/effect-size-comparison.html", "comparisons/effect-size-comparison.html"),
+    ("examples/table-adapter-comparison.html", "comparisons/table-adapter-comparison.html"),
 ]
     destination = joinpath(generated, target)
     mkpath(dirname(destination))
@@ -41,6 +42,7 @@ pages=["Home"=>"index.md",
                          "Pooling risk differences"=>"tutorials/risk-difference-models.md",
                          "Phylogenetic boundary"=>"tutorials/phylo-boundary.md",
                          "Phylogenetic interior fit"=>"tutorials/phylo-interior.md",
-                         "Phylogenetic labels"=>"tutorials/phylo-labels.md"]],
+                         "Phylogenetic labels"=>"tutorials/phylo-labels.md",
+                         "Table and formula adapter"=>"tutorials/table-adapter.md"]],
 )
 println("DOCUMENTATION_BUILD_OK")

@@ -10,7 +10,7 @@ The project follows the analysis structure familiar to R `metafor` users: calcul
 
 ## Start with the tutorials
 
-The [documentation site](https://itchyshin.github.io/Metafor.jl/) contains 20 topic-focused tutorials and a differences guide. Start with the [BCG example](https://itchyshin.github.io/Metafor.jl/tutorials/bcg-effects/), then explore fixed and random effects, meta-regression, predictions, forest data, correlated effects, nested effects, a two-outcome model, and phylogenetic boundary and interior fits.
+The [documentation site](https://itchyshin.github.io/Metafor.jl/) contains 21 topic-focused tutorials and a differences guide. Start with the [BCG example](https://itchyshin.github.io/Metafor.jl/tutorials/bcg-effects/), then explore fixed and random effects, meta-regression, predictions, forest data, correlated effects, nested effects, a two-outcome model, phylogenetic boundary and interior fits, and table/formula adapter checks.
 
 ```sh
 julia --project=. examples/bcg.jl
@@ -20,7 +20,7 @@ julia --project=. examples/phylogeny.jl
 
 The tutorial overview lists the focused `--case` commands. Running these scripts without a selector rebuilds each complete comparison result. Install Julia dependencies first with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`.
 
-The [three-language BCG comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/bcg-comparison.html), [dependent-effects comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/dependent-comparison.html), and [phylogenetic comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/phylogeny-comparison.html), and [effect-size comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/effect-size-comparison.html) place R metafor 5.2-1, Julia, and Python results side by side. The plots and comparison pages are original. Fixture provenance and checksums live under [`reference/`](reference/).
+The [BCG comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/bcg-comparison.html), [dependent-effects comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/dependent-comparison.html), [phylogenetic comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/phylogeny-comparison.html), [effect-size comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/effect-size-comparison.html), and [table-adapter comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/table-adapter-comparison.html) show results across the supported fixtures. Fixture provenance and checksums live under [`reference/`](reference/).
 
 GitHub Actions checks documentation builds from `main`. GitHub Pages serves the static site from the `gh-pages` branch; the source tutorials and package code remain on `main`.
 
