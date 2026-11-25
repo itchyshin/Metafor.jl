@@ -1,21 +1,50 @@
 # Metafor.jl
 
-A native Julia implementation of selected methods from Wolfgang Viechtbauer's R package **metafor**.
+**Native Julia methods inspired by the R package [`metafor`](https://www.metafor-project.org/).**
 
-## Run the BCG example
+**Tutorials and examples:** [Metafor.jl documentation](https://itchyshin.github.io/Metafor.jl/) · [source repository](https://github.com/itchyshin/Metafor.jl)
 
-From the repository root, run:
+Metafor.jl is an experimental, independently developed Julia port of selected meta-analysis methods. It is not the R package and does not reproduce its full API. The [compatibility table](COMPATIBILITY.md) records what is verified, partial, unsupported, or intentionally different.
+
+The project follows the analysis structure familiar to R `metafor` users: calculate study effects, fit models, interpret uncertainty, and inspect plots. The core uses Julia arrays and structured result types, with table and formula adapters built around native design matrices.
+
+## Start with the tutorials
+
+The [documentation site](https://itchyshin.github.io/Metafor.jl/) contains ten runnable analysis stages with paired tutorials, plus a differences guide. Start with the [BCG example](https://itchyshin.github.io/Metafor.jl/tutorials/bcg-effects/), then explore fixed and random effects, meta-regression, predictions, forest data, correlated effects, nested effects, a two-outcome model, and phylogenetic boundary and interior fits.
 
 ```sh
 julia --project=. examples/bcg.jl
+julia --project=. examples/dependent.jl
+julia --project=. examples/phylogeny.jl
 ```
 
-The example reads the shared raw-count fixture, computes log risk ratios, fits fixed-effect and REML models, fits an absolute-latitude moderator, calculates confidence and prediction intervals, and writes forest data plus an SVG plot under `examples/`.
+The tutorial overview lists the focused `--case` commands. Running these scripts without a selector rebuilds each complete comparison result. Install Julia dependencies first with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`.
 
-The raw data are from `metadat::dat.bcg`, distributed under GPL (>= 2), with source and terms recorded in `reference/v1/PROVENANCE.md`. The upstream example is linked there. Tutorial prose and plots in this repository are original.
+The [three-language BCG comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/bcg-comparison.html), [dependent-effects comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/dependent-comparison.html), and [phylogenetic comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/phylogeny-comparison.html) place R metafor 5.2-1, Julia, and Python results side by side. The plots and comparison pages are original. Fixture provenance and checksums live under [`reference/`](reference/).
 
-The intended maintainers are Shinichi Nakagawa, Yefeng Yang, and Wolfgang Viechtbauer. This records the project’s intended team; it does not imply that any person has accepted a role.
+Build the documentation locally:
 
-## Differences from R metafor
+```sh
+julia --project=docs docs/make.jl
+```
 
-The package currently supports matrix-first univariate models, a StatsModels formula adapter for Tables.jl inputs, forest data, and an initial supplied-correlation phylogenetic model. It does not implement all effect sizes, all multivariate structures, small-sample inference, or the complete diagnostic suite. See `COMPATIBILITY.md` for the supported and unsupported options.
+Open `docs/build/index.html` after the build. The [GitHub Pages workflow](.github/workflows/pages.yml) builds this documentation from the repository and deploys it from `main`.
+
+## What the project covers
+
+- Log risk ratios from 2×2 study counts, fixed-effect and REML models, and a latitude moderator.
+- Mean and prediction intervals, row-aligned forest data, and an original SVG plot.
+- Supplied sampling covariance matrices, nested scalar random effects, a two-outcome covariance model, and a supplied phylogenetic correlation matrix.
+- Versioned R reference fixtures used for parity checks. Julia runs without R.
+
+These methods cover a small part of the R package. See [`COMPATIBILITY.md`](COMPATIBILITY.md) before relying on a function or option. One passing example does not establish broader support.
+
+## Relationship to R `metafor`
+
+The upstream R package was written by Wolfgang Viechtbauer and provides a much broader collection of meta-analysis methods. This repository credits and links to the [official project site](https://www.metafor-project.org/), [R documentation](https://wviechtb.github.io/metafor/), and the [BCG dataset documentation](https://wviechtb.github.io/metadat/reference/dat.bcg.html). The tutorial pages use original prose and distinguish synthetic fixtures from published data. GPL notices are retained where derivative code or data require them.
+
+Project-intended maintainers: Shinichi Nakagawa, Yefeng Yang, and Wolfgang Viechtbauer. This records the project's intended team and does not imply that anyone has accepted a role.
+
+## License and status
+
+This repository is experimental and unreleased. See [`LICENSE`](LICENSE) and each fixture's provenance record for license and data terms. The documentation site is published from `main`; no package release has been made.

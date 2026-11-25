@@ -4,7 +4,11 @@ using LinearAlgebra
 using Printf
 
 root = normpath(joinpath(@__DIR__, ".."))
-for case in ("v1", "v2-interior")
+case_arg = findfirst(arg -> startswith(arg, "--case="), ARGS)
+case = case_arg === nothing ? "all" : split(ARGS[case_arg], "=", limit=2)[2]
+case in ("all", "boundary", "interior") || error("unknown --case=$case")
+fixtures = case == "all" ? ("v1", "v2-interior") : case == "boundary" ? ("v1",) : ("v2-interior",)
+for case in fixtures
     base = joinpath(root, "reference", "phylogeny", case)
     obs, _ = readdlm(joinpath(base,"observations.csv"), ',', Any, '\n'; header=true)
     rawA, matrix_header = readdlm(joinpath(base,"species-correlation.csv"), ',', Any, '\n'; header=true)

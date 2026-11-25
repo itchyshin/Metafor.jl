@@ -2,4 +2,6 @@
 .unlazy/
 /graft/
 /docs/build/
+/docs/src/assets/generated/
+/examples/generated/
 .ignore

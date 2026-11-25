@@ -23,3 +23,13 @@ Scope: verify the native Julia port, shared references, tutorials, and mirrored 
   CHECK: cmp examples/bcg-comparison.html '/Users/z3437171/Dropbox/Github Local/metafor-py/examples/bcg-comparison.html' && cmp examples/phylogeny-comparison.html '/Users/z3437171/Dropbox/Github Local/metafor-py/examples/phylogeny-comparison.html' && cmp examples/dependent-comparison.html '/Users/z3437171/Dropbox/Github Local/metafor-py/examples/dependent-comparison.html' && echo HTML_MIRROR_OK
   EXPECT: HTML_MIRROR_OK
   EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=HTML_MIRROR_OK
+
+- [x] G5: ten tutorial pages build and the comparison pages are linked into the generated Julia site
+  CHECK: python3 -c "from pathlib import Path; p=Path('docs/build/tutorials'); names=['bcg-effects','bcg-models','bcg-moderator','bcg-prediction','bcg-forest','dependent-gls','dependent-nested','dependent-bivariate','phylogeny','differences']; c=Path('docs/build/assets/generated/comparisons'); assert all((p/n/'index.html').is_file() for n in names); assert all((c/n).is_file() for n in ['bcg-comparison.html','dependent-comparison.html','phylogeny-comparison.html']); print('JULIA_TUTORIALS_AND_COMPARISONS_OK')"
+  EXPECT: JULIA_TUTORIALS_AND_COMPARISONS_OK
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=JULIA_TUTORIALS_AND_COMPARISONS_OK
+
+- [x] G6: the Julia GitHub Pages workflow parses as YAML
+  CHECK: ruby -e 'require "yaml"; YAML.load_file(".github/workflows/pages.yml"); puts "PAGES_WORKFLOW_YAML_OK"'
+  EXPECT: PAGES_WORKFLOW_YAML_OK
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=PAGES_WORKFLOW_YAML_OK

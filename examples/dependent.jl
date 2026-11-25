@@ -33,6 +33,7 @@ function add_fit!(estimates,covariances,model,fit,labels,k)
 end
 
 function write_rows(path,header,rows)
+    mkpath(dirname(path))
     open(path,"w") do io
         println(io,join(header,','))
         for row in rows
@@ -44,14 +45,26 @@ end
 
 function arg_value(args,key,default)
     i = findfirst(==(key),args)
+    if i !== nothing
+        i < length(args) || error("$key needs a value")
+        return args[i+1]
+    end
+    i = findfirst(arg -> startswith(arg, key * "="), args)
     i === nothing && return default
-    i < length(args) || error("$key needs a path")
-    args[i+1]
+    split(args[i], "=", limit=2)[2]
 end
 
 function main()
-    output = arg_value(ARGS,"--output",joinpath(@__DIR__,"dependent-julia-results.csv"))
-    covariance_output = arg_value(ARGS,"--covariance-output",joinpath(@__DIR__,"dependent-julia-covariance.csv"))
+    case = arg_value(ARGS, "--case", "all")
+    case in ("all", "gls", "nested", "bivariate") || error("unknown --case=$case")
+    result_stem = case == "all" ? "dependent-julia-results" : "dependent-julia-$(case)-results"
+    covariance_stem = case == "all" ? "dependent-julia-covariance" : "dependent-julia-$(case)-covariance"
+    result_dir = @__DIR__
+    if case != "all"
+        result_dir = joinpath(@__DIR__,"generated","dependent")
+    end
+    output = arg_value(ARGS,"--output",joinpath(result_dir,result_stem*".csv"))
+    covariance_output = arg_value(ARGS,"--covariance-output",joinpath(result_dir,covariance_stem*".csv"))
     estimates = Tuple{String,String,String,Float64}[]
     covariances = Tuple{String,String,String,Float64}[]
 
@@ -90,6 +103,12 @@ function main()
     push!(estimates,("berkey-un","covariance","benefit-harm",between))
     push!(estimates,("berkey-un","correlation","benefit-harm",between/sqrt(sigma[1,1]*sigma[2,2])))
 
+    model_for_case = Dict("gls"=>"correlated-gls", "nested"=>"nested-reml", "bivariate"=>"berkey-un")
+    if case != "all"
+        selected = model_for_case[case]
+        filter!(row -> row[1] == selected, estimates)
+        filter!(row -> row[1] == selected, covariances)
+    end
     write_rows(output,["model","quantity","name","estimate"],estimates)
     write_rows(covariance_output,["model","row","column","estimate"],covariances)
     println("Wrote $(length(estimates)) R-comparable estimates to $output")
