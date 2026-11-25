@@ -94,6 +94,62 @@ if selected("bcg-edges")
     println("VERIFY_BCG_EDGES_OK")
 end
 
+if selected("effect-sizes")
+    @testset "OR and RD effect sizes" begin
+        reference_path = joinpath(root,"reference","effect-sizes","v1","bcg-effect-sizes.csv")
+        ref, ref_header = readdlm(reference_path, ',', Any, '\n'; header=true)
+        ref_names = String.(vec(ref_header))
+        ref_column(name) = ref[:,findfirst(==(name),ref_names)]
+        raw, raw_header = readdlm(joinpath(root,"reference","v1","bcg.csv"), ',', Any, '\n'; header=true)
+        names = String.(vec(raw_header))
+        column(name) = raw[:,findfirst(==(name),names)]
+        for (measure, calculator) in (("OR",escalc_or), ("RD",escalc_rd))
+            indices = findall(==(measure),String.(ref_column("measure")))
+            yi, vi = calculator(Float64.(column("tpos")),Float64.(column("tneg")),
+                                Float64.(column("cpos")),Float64.(column("cneg")))
+            @test yi ≈ Float64.(ref_column("yi")[indices]) atol=1e-12 rtol=1e-12
+            @test vi ≈ Float64.(ref_column("vi")[indices]) atol=1e-12 rtol=1e-12
+        end
+        zero_ref, zero_header = readdlm(joinpath(root,"reference","effect-sizes","v1","zero-cell-reference.csv"), ',', Any, '\n'; header=true)
+        zero_names = String.(vec(zero_header))
+        zcolumn(name) = zero_ref[:,findfirst(==(name),zero_names)]
+        refnum(value) = string(value) == "NA" ? NaN : Float64(value)
+        for (measure, calculator) in (("OR",escalc_or), ("RD",escalc_rd)), policy in ("only0","all","if0all","none")
+            indices = findall((String.(zcolumn("measure")) .== measure) .& (String.(zcolumn("policy")) .== policy))
+            yi,vi = calculator([0,2],[10,8],[2,3],[8,7];to=Symbol(policy))
+            expected_y = refnum.(zcolumn("yi")[indices]); expected_v = refnum.(zcolumn("vi")[indices])
+            for i in eachindex(yi)
+                @test (isnan(yi[i]) && isnan(expected_y[i])) || isapprox(yi[i], expected_y[i]; atol=1e-12, rtol=1e-12)
+                @test (isnan(vi[i]) && isnan(expected_v[i])) || isapprox(vi[i], expected_v[i]; atol=1e-12, rtol=1e-12)
+            end
+        end
+
+        or_y,or_v = escalc_or([2,0],[8,10],[5,2],[5,8])
+        @test or_y ≈ [log(0.25),log((0.5*8.5)/(10.5*2.5))] atol=1e-12
+        @test or_v ≈ [1/2+1/8+1/5+1/5,1/0.5+1/10.5+1/2.5+1/8.5] atol=1e-12
+        rd_y,rd_v = escalc_rd([2],[8],[5],[5])
+        @test rd_y[1] ≈ 0.2-0.5 atol=1e-12
+        @test rd_v[1] ≈ 0.2*0.8/10 + 0.5*0.5/10 atol=1e-12
+
+        for calculator in (escalc_or,escalc_rd), policy in (:only0,:all,:if0all,:none)
+            yi,vi = calculator([0,2],[10,8],[2,3],[8,7];to=policy)
+            if calculator === escalc_or && policy === :none
+                @test isnan(yi[1]) && isnan(vi[1])
+            else
+                @test isfinite(yi[1]) && isfinite(vi[1])
+            end
+            @test isfinite(yi[2]) && isfinite(vi[2])
+        end
+        missing_y,missing_v = escalc_or(Union{Missing,Int}[missing,1],[5,4],[2,2],[3,3])
+        @test isnan(missing_y[1]) && isnan(missing_v[1])
+        @test isfinite(missing_y[2]) && isfinite(missing_v[2])
+        @test_throws ArgumentError escalc_rd([-1],[3],[1],[2])
+        @test_throws ArgumentError escalc_or([1.2],[3],[1],[2])
+        @test_throws ArgumentError escalc_or([1],[3],[1],[2];to=:wrong)
+    end
+    println("VERIFY_EFFECT_SIZES_OK")
+end
+
 if selected("bcg-adapters")
     @testset "BCG table and forest adapters" begin
         yi,vi,latitude,authors,trials = read_bcg()
@@ -179,4 +235,4 @@ end
 
 include("dependent.jl")
 
-requested in ("all","bcg-models","bcg-edges","bcg-adapters","phylogeny-model","dependent-model","dependent-edges") || error("unknown test group: $requested")
+requested in ("all","bcg-models","bcg-edges","bcg-adapters","effect-sizes","phylogeny-model","dependent-model","dependent-edges") || error("unknown test group: $requested")

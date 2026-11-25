@@ -23,3 +23,13 @@ Run `julia --project=. examples/phylogeny.jl`. From the Python repository, run `
 ## Differences from R metafor
 
 This experimental Julia port supports log risk ratios, fixed-effect and REML matrix models, a StatsModels formula/table adapter, normal mean and new-study intervals, forest data, and the supplied-correlation phylogenetic model shown here. Missing and non-finite rows are omitted with a Julia warning and row indices are retained, but warning categories differ from R. REML with zero sampling variances is unsupported and raises an explicit error. The package does not implement every effect-size measure, all multivariate structures, small-sample inference options, or the full diagnostic suite. See `COMPATIBILITY.md` for verified and unsupported options.
+
+
+## Native 2 × 2 effect-size functions
+
+These functions return the effect estimates and their large-sample sampling variances.
+
+```@docs
+Metafor.escalc_or
+Metafor.escalc_rd
+```

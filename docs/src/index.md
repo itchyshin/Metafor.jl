@@ -4,7 +4,7 @@ Metafor.jl is an experimental Julia port of selected methods from Wolfgang Viech
 
 The project follows the R package's question-to-analysis path: calculate study effects, fit a model, interpret uncertainty, and inspect plots. Its core uses native Julia arrays and structured results, with table and formula adapters built around explicit design matrices.
 
-The tutorials use pinned R reference inputs shared with [metafor-py](https://github.com/itchyshin/metafor-py). Their wording and plots are original. The [BCG](assets/generated/comparisons/bcg-comparison.html), [dependent-effects](assets/generated/comparisons/dependent-comparison.html), and [phylogenetic](assets/generated/comparisons/phylogeny-comparison.html) comparison pages show R, Julia, and Python results side by side.
+The tutorials use pinned R reference inputs shared with [metafor-py](https://github.com/itchyshin/metafor-py). Their wording and plots are original. The [BCG](assets/generated/comparisons/bcg-comparison.html), [dependent-effects](assets/generated/comparisons/dependent-comparison.html), [phylogenetic](assets/generated/comparisons/phylogeny-comparison.html), and [effect-size](assets/generated/comparisons/effect-size-comparison.html) comparison pages show R, Julia, and Python results side by side.
 
 ## Start with an analysis
 

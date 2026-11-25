@@ -20,7 +20,7 @@ julia --project=. examples/phylogeny.jl
 
 The tutorial overview lists the focused `--case` commands. Running these scripts without a selector rebuilds each complete comparison result. Install Julia dependencies first with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`.
 
-The [three-language BCG comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/bcg-comparison.html), [dependent-effects comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/dependent-comparison.html), and [phylogenetic comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/phylogeny-comparison.html) place R metafor 5.2-1, Julia, and Python results side by side. The plots and comparison pages are original. Fixture provenance and checksums live under [`reference/`](reference/).
+The [three-language BCG comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/bcg-comparison.html), [dependent-effects comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/dependent-comparison.html), and [phylogenetic comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/phylogeny-comparison.html) and [effect-size comparison](https://itchyshin.github.io/Metafor.jl/assets/generated/comparisons/effect-size-comparison.html) place R metafor 5.2-1, Julia, and Python results side by side. The plots and comparison pages are original. Fixture provenance and checksums live under [`reference/`](reference/).
 
 Build the documentation locally:
 

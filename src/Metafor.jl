@@ -7,7 +7,7 @@ using Tables
 using Distributions
 using Optim
 
-export MetaResult, PredictionResult, TableMetaResult, escalc_rr, fit_meta,
+export MetaResult, PredictionResult, TableMetaResult, escalc_or, escalc_rd, escalc_rr, fit_meta,
        fit_meta_formula, fit_meta_cov_formula, fit_phylo, fit_meta_cov, fit_meta_nested, fit_meta_un,
        DependentMetaResult, predict, forest_plot_data
 
@@ -191,6 +191,61 @@ function escalc_rr(ai, bi, ci, di; add=0.5, to=:only0)
     end
     yi, vi
 end
+
+function _escalc_2x2(ai, bi, ci, di, measure; add=0.5, to=:only0)
+    n = length(ai)
+    length(bi) == n == length(ci) == length(di) || throw(ArgumentError("count vectors must have equal lengths"))
+    correction = Float64(add)
+    isfinite(correction) && correction >= 0 || throw(ArgumentError("add must be a finite nonnegative number"))
+    to in (:only0, :all, :if0all, :none) || throw(ArgumentError("unsupported zero-cell policy"))
+
+    columns = (ai,bi,ci,di)
+    any_zero = false
+    if to == :if0all
+        for values in columns, value in values
+            ismissing(value) && continue
+            count = Float64(value)
+            if isfinite(count) && iszero(count)
+                any_zero = true
+                break
+            end
+        end
+    end
+
+    yi = fill(NaN, n)
+    vi = fill(NaN, n)
+    for i in 1:n
+        cells = (ai[i],bi[i],ci[i],di[i])
+        any(ismissing,cells) && continue
+        a, b, c, d = Float64.(cells)
+        all(isfinite,(a,b,c,d)) || continue
+        all(x -> x >= 0 && isinteger(x),(a,b,c,d)) || throw(ArgumentError("counts must be nonnegative integers"))
+        table_has_zero = iszero(a) || iszero(b) || iszero(c) || iszero(d)
+        adjust = to == :all || (to == :only0 && table_has_zero) || (to == :if0all && any_zero)
+        if adjust
+            a += correction; b += correction; c += correction; d += correction
+        end
+
+        if measure == :OR
+            min(a,b,c,d) > 0 || continue
+            yi[i] = log(a) + log(d) - log(b) - log(c)
+            vi[i] = 1/a + 1/b + 1/c + 1/d
+        else
+            n1, n2 = a+b, c+d
+            n1 > 0 && n2 > 0 || continue
+            p1, p2 = a/n1, c/n2
+            yi[i] = p1-p2
+            vi[i] = p1*(1-p1)/n1 + p2*(1-p2)/n2
+        end
+    end
+    yi, vi
+end
+
+"""Compute log odds ratios and large-sample sampling variances from 2x2 counts."""
+escalc_or(ai, bi, ci, di; add=0.5, to=:only0) = _escalc_2x2(ai,bi,ci,di,:OR;add=add,to=to)
+
+"""Compute risk differences and binomial sampling variances from 2x2 counts."""
+escalc_rd(ai, bi, ci, di; add=0.5, to=:only0) = _escalc_2x2(ai,bi,ci,di,:RD;add=add,to=to)
 
 function fit_meta(yi, vi; X=nothing, method=:REML, threshold=1e-5)
     length(yi) == length(vi) || throw(ArgumentError("yi and vi must have equal lengths"))

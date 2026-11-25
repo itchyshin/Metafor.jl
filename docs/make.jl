@@ -9,6 +9,7 @@ for (source, target) in [
     ("examples/bcg-comparison.html", "comparisons/bcg-comparison.html"),
     ("examples/dependent-comparison.html", "comparisons/dependent-comparison.html"),
     ("examples/phylogeny-comparison.html", "comparisons/phylogeny-comparison.html"),
+    ("examples/effect-size-comparison.html", "comparisons/effect-size-comparison.html"),
 ]
     destination = joinpath(generated, target)
     mkpath(dirname(destination))
@@ -30,6 +31,16 @@ pages=["Home"=>"index.md",
                          "Nested effects"=>"tutorials/dependent-nested.md",
                          "Two outcomes"=>"tutorials/dependent-bivariate.md",
                          "Supplied phylogenetic correlation"=>"tutorials/phylogeny.md",
-                         "Differences from R metafor"=>"tutorials/differences.md"]],
+                         "Differences from R metafor"=>"tutorials/differences.md",
+                         "Odds ratios"=>"tutorials/odds-ratio.md",
+                         "Risk differences"=>"tutorials/risk-difference.md",
+                         "Choosing an effect scale"=>"tutorials/effect-scale.md",
+                         "Zero-cell policies"=>"tutorials/zero-cell-policies.md",
+                         "Missing rows"=>"tutorials/missing-rows.md",
+                         "Pooling log odds ratios"=>"tutorials/odds-ratio-models.md",
+                         "Pooling risk differences"=>"tutorials/risk-difference-models.md",
+                         "Phylogenetic boundary"=>"tutorials/phylo-boundary.md",
+                         "Phylogenetic interior fit"=>"tutorials/phylo-interior.md",
+                         "Phylogenetic labels"=>"tutorials/phylo-labels.md"]],
 )
 println("DOCUMENTATION_BUILD_OK")
