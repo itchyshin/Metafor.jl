@@ -27,29 +27,24 @@ Scope: verify the native Julia port, shared references, tutorials, and mirrored 
 - [x] G5: twenty tutorial pages build and four comparison pages are linked into the generated Julia site
   CHECK: python3 -c "from pathlib import Path; p=Path('docs/build/tutorials'); names=[x for x in Path('docs/src/tutorials').glob('*.md') if x.stem!='index']; c=Path('docs/build/assets/generated/comparisons'); assert len(names)==20 and all((p/x.stem/'index.html').is_file() for x in names); assert all((c/n).is_file() for n in ['bcg-comparison.html','dependent-comparison.html','phylogeny-comparison.html','effect-size-comparison.html']); print('JULIA_20_TUTORIALS_AND_PARITY_ARTIFACT_OK')"
   EXPECT: JULIA_20_TUTORIALS_AND_PARITY_ARTIFACT_OK
-  EVIDENCE: exit=0; Documenter build passed; twenty topic pages and four comparison HTML files verified.
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=JULIA_20_TUTORIALS_AND_PARITY_ARTIFACT_OK
 
-- [x] G6: the Julia GitHub Pages workflow parses as YAML
-  CHECK: ruby -e 'require "yaml"; YAML.load_file(".github/workflows/pages.yml"); puts "PAGES_WORKFLOW_YAML_OK"'
+- [x] G6: the Julia documentation-check workflow parses as YAML
+  CHECK: ruby -e 'require "yaml"; YAML.load_file(".github/workflows/docs.yml"); puts "PAGES_WORKFLOW_YAML_OK"'
   EXPECT: PAGES_WORKFLOW_YAML_OK
   EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=PAGES_WORKFLOW_YAML_OK
 
 - [x] G7: the native OR/RD focused test group passes
   CHECK: OPENBLAS_NUM_THREADS=1 JULIA_NUM_THREADS=1 julia --project test/runtests.jl effect-sizes
   EXPECT: VERIFY_EFFECT_SIZES_OK
-  EVIDENCE: exit=0; 61 assertions passed, including BCG, hand calculations, missing rows, and all four zero-cell policies.
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=OR and RD effect sizes |   61     61  1.9s | VERIFY_EFFECT_SIZES_OK
 
-- [x] G8: all twenty tutorial pages build and comparison pages are linked into generated Julia site
-  CHECK: python3 -c "from pathlib import Path; p=Path('docs/build/tutorials'); names=[x for x in Path('docs/src/tutorials').glob('*.md') if x.stem!='index']; c=Path('docs/build/assets/generated/comparisons'); assert len(names)==20 and all((p/x.stem/'index.html').is_file() for x in names); assert all((c/n).is_file() for n in ['bcg-comparison.html','dependent-comparison.html','phylogeny-comparison.html','effect-size-comparison.html']); print('JULIA_20_TUTORIALS_AND_PARITY_ARTIFACT_OK')"
-  EXPECT: JULIA_20_TUTORIALS_AND_PARITY_ARTIFACT_OK
-  EVIDENCE: exit=0; Documenter build passed; twenty topic pages and four comparison HTML files verified.
+- [x] G8: pinned effect-size comparison artifact is mirrored byte-for-byte
+  CHECK: cmp examples/effect-size-comparison.html '/Users/z3437171/Dropbox/Github Local/metafor-py/examples/effect-size-comparison.html' && echo EFFECT_SIZE_HTML_MIRROR_OK
+  EXPECT: EFFECT_SIZE_HTML_MIRROR_OK
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=EFFECT_SIZE_HTML_MIRROR_OK
 
-- [x] G9: pinned effect-size comparison artifact is mirrored byte-for-byte
-  CHECK: cmp examples/effect-size-comparison.html '/Users/z3437171/Dropbox/Github Local/metafor-py/examples/effect-size-comparison.html'
-  EXPECT: exit=0
-  EVIDENCE: exit=0; shared 232-comparison artifact with the same three-language results.
-
-- [x] G10: three BCG effect scales and correction policies agree with pinned R output
-  CHECK: run native Python and Julia effect-size examples for `--case=all`, `--case=scale`, and `--case=zero-correction`, then run `python tools/compare_effect_sizes.py` in metafor-py
+- [x] G9: three BCG effect scales and correction policies agree with pinned R output
+  CHECK: julia --project examples/effect-sizes.jl --case=all && julia --project examples/effect-sizes.jl --case=scale && julia --project examples/effect-sizes.jl --case=zero-correction && (cd ../metafor-py && PYTHONPATH=src python examples/effect-sizes.py --case=all && PYTHONPATH=src python examples/effect-sizes.py --case=scale && PYTHONPATH=src python examples/effect-sizes.py --case=zero-correction && python tools/compare_effect_sizes.py)
   EXPECT: EFFECT_SIZE_PARITY_OK checks=316
-  EVIDENCE: max absolute differences effect=3.9968028886505635e-15, model=5.4569682106375694e-12, correction=4.884981308350689e-15; scales RR/OR/RD included.
+  EVIDENCE: exit=0; shell=/bin/sh; cwd=/Users/z3437171/Dropbox/Github Local/Metafor.jl; path=b12a711c1484/40 entries; output=EFFECT_SIZE_EXAMPLE_OK case=zero-correction rows=16 /Users/z3437171/Dropbox/Github Local/metafor-py/examples/generated/effect-sizes/python-zero-correction.csv | EFFECT_SIZE_PARITY_OK checks=316 max={'effect': 3.9968028886505635e-15, 'model'

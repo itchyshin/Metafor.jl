@@ -8,7 +8,16 @@ The tutorials use pinned R reference inputs shared with [metafor-py](https://git
 
 ## Start with an analysis
 
-Follow the [tutorial overview](tutorials/index.md) from raw study counts to effect sizes, pooled models, a latitude moderator, predictions, and forest-plot data. Then continue to correlated and nested effects, two outcomes, and the supplied-correlation phylogenetic examples. Every page includes the runnable command and interpretation.
+Follow 20 focused tutorials from raw study counts to effect sizes, pooled models, a latitude moderator, predictions, and forest-plot data. Continue to correlated and nested effects, two outcomes, and supplied-correlation phylogenetic examples. Each topic page includes a runnable command and interpretation. Start at the [tutorial overview](tutorials/index.md). Install dependencies from the checkout with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`; the package remains experimental and unregistered.
+
+## Choose a starting point
+
+| If you want to… | Start here |
+|---|---|
+| Analyze two-group counts | [BCG effect sizes](tutorials/bcg-effects.md) |
+| Model dependent outcomes | [Correlated sampling errors](tutorials/dependent-gls.md) |
+| Use a species correlation | [Supplied phylogenetic correlation](tutorials/phylogeny.md) |
+
 
 !!! note "Experimental status"
     This package is unreleased and covers a selected subset. A passing example establishes parity only for its named fixture, options, and outputs.
@@ -26,11 +35,9 @@ Project-intended maintainers are Shinichi Nakagawa, Yefeng Yang, and Wolfgang Vi
 
 The upstream R project is [metafor-project.org](https://www.metafor-project.org/); its manuals and function references are at [wviechtb.github.io/metafor](https://wviechtb.github.io/metafor/).
 
-The [Metafor.jl source repository](https://github.com/itchyshin/Metafor.jl) contains the implementation, tests, fixtures, and this site's source.
+The [Metafor.jl source repository](https://github.com/itchyshin/Metafor.jl) contains the implementation, tests, fixtures, and this site's source. Its companion [Python site](https://itchyshin.github.io/metafor-py/) follows the same analysis stages.
 
 ```@contents
 Pages = ["tutorials/index.md"]
 Depth = 2
 ```
-
-The [Metafor.jl source repository](https://github.com/itchyshin/Metafor.jl) contains the implementation and fixtures. The companion [Python documentation](https://itchyshin.github.io/metafor-py/) follows the same fixtures and analysis stages.
