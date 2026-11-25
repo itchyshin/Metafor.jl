@@ -56,7 +56,7 @@ DependentMetaResult
 
 The pinned R reference estimates the nested intercept at 0.6034 and its moderator slope at 0.2770. The study and nested-effect variances are 0.1133 and 0.0221. In the bivariate case, the estimated benefit and harm means are 0.4856 and 0.2422; the estimated between-outcome covariance is 0.2316. These values describe only generated fixtures.
 
-Run `julia --project examples/dependent.jl` from this repository to write the Julia estimates. From the Python checkout, `python tools/compare-dependent.py` runs both ports and writes `examples/dependent-comparison.html`. The current gate checks 42 estimates and 12 coefficient-covariance entries against the R reference.
+Run `julia --project examples/dependent.jl` from this repository to write the Julia estimates. From the Python checkout, `python tools/compare-dependent.py` runs both ports and writes a local pairwise comparison report. The current gate checks 42 estimates and 12 coefficient-covariance entries against the R reference.
 
 ## Differences from R metafor
 

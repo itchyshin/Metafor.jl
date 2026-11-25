@@ -1,44 +1,27 @@
-# Metafor.jl: selected native Julia methods for meta-analysis
+# Metafor.jl
 
-Metafor.jl is an experimental Julia port of selected methods from Wolfgang Viechtbauer's R package [`metafor`](https://www.metafor-project.org/). It is a separate implementation, not the R package or a complete replacement. The compatibility table records scope by function and option.
+**Meta-analysis methods in native Julia, with carefully bounded comparisons to R `metafor`.**
 
-The project follows the R package's question-to-analysis path: calculate study effects, fit a model, interpret uncertainty, and inspect plots. Its core uses native Julia arrays and structured results, with table and formula adapters built around explicit design matrices.
+Metafor.jl is an experimental, independently developed port of selected methods from Wolfgang Viechtbauer's R package [`metafor`](https://www.metafor-project.org/). It is not the R package and does not reproduce its full API. The [compatibility reference](reference/index.md) states what has been checked and where support remains partial or absent.
 
-The tutorials use pinned R reference inputs shared with [metafor-py](https://github.com/itchyshin/metafor-py). Their wording and plots are original. The [BCG](assets/generated/comparisons/bcg-comparison.html), [dependent-effects](assets/generated/comparisons/dependent-comparison.html), [phylogenetic](assets/generated/comparisons/phylogeny-comparison.html), and [effect-size](assets/generated/comparisons/effect-size-comparison.html) comparison pages show R, Julia, and Python results side by side. A separate [table-adapter comparison](assets/generated/comparisons/table-adapter-comparison.html) checks row alignment and numeric design matrices in Julia and Python.
+### Start an analysis
 
-## Start with an analysis
+Install the checkout, run a BCG example, and inspect the output in the [getting-started guide](getting-started.md).
 
-Follow 21 focused tutorials from raw study counts to effect sizes, pooled models, a latitude moderator, predictions, and forest-plot data. Continue to correlated and nested effects, two outcomes, and supplied-correlation phylogenetic examples. Each topic page includes a runnable command and interpretation. Start at the [tutorial overview](tutorials/index.md). Install dependencies from the checkout with `julia --project=. -e 'using Pkg; Pkg.instantiate()'`; the package remains experimental and unregistered.
+### Browse the methods
 
-## Choose a starting point
+Find exported functions, result fields, and supported options in the [reference](reference/index.md), or follow one of the [21 focused tutorials](tutorials/index.md).
 
-| If you want to… | Start here |
-|---|---|
-| Analyze two-group counts | [BCG effect sizes](tutorials/bcg-effects.md) |
-| Model dependent outcomes | [Correlated sampling errors](tutorials/dependent-gls.md) |
-| Use a species correlation | [Supplied phylogenetic correlation](tutorials/phylogeny.md) |
-| Keep formula and matrix rows aligned | [Table and formula adapter](tutorials/table-adapter.md) |
+### Inspect comparisons
 
+The [R vs Julia comparison page](compare.md) links to the generated results for effect sizes, BCG models, dependent effects, phylogeny, and table inputs.
 
-!!! note "Experimental status"
-    This package is unreleased and covers a selected subset. A passing example establishes parity only for its named fixture, options, and outputs.
+## Project and scope
 
-## Current scope
+The package follows a familiar workflow: calculate study effects, fit a model, interpret uncertainty, and inspect forest-plot data. Its core uses Julia arrays and structured result types; Tables.jl and StatsModels.jl adapters are available for tabular and formula inputs.
 
-- Log risk ratios from 2×2 counts, fixed-effect and REML models, and a latitude moderator.
-- Mean and new-study prediction intervals, row-aligned forest data, and an original SVG.
-- Supplied sampling covariance, nested scalar random effects, two-outcome covariance, and supplied phylogenetic correlation.
-- Versioned R reference fixtures. Julia runs without R.
+The current examples cover log risk ratios, odds ratios and risk differences from two-by-two counts; fixed-effect and REML models; meta-regression and predictions; supplied sampling covariance; nested scalar random effects; a two-outcome model; and supplied phylogenetic correlation. The [compatibility reference](reference/index.md) gives the specific limits. Passing one fixture does not establish broader compatibility.
 
-The package does not implement the full R API. See the [compatibility table](assets/generated/references/COMPATIBILITY.md) for verified, partial, unsupported, and intentional differences.
+**Project-intended maintainers:** Shinichi Nakagawa, Yefeng Yang, and Wolfgang Viechtbauer. This describes the intended project team and does not imply that anyone has accepted a role. Wolfgang Viechtbauer is the author of the upstream R package.
 
-Project-intended maintainers are Shinichi Nakagawa, Yefeng Yang, and Wolfgang Viechtbauer. This records the intended project team; it does not imply that anyone has accepted a role.
-
-The upstream R project is [metafor-project.org](https://www.metafor-project.org/); its manuals and function references are at [wviechtb.github.io/metafor](https://wviechtb.github.io/metafor/).
-
-The [Metafor.jl source repository](https://github.com/itchyshin/Metafor.jl) contains the implementation, tests, fixtures, and this site's source. Its companion [Python site](https://itchyshin.github.io/metafor-py/) follows the same analysis stages.
-
-```@contents
-Pages = ["tutorials/index.md"]
-Depth = 2
-```
+Metafor.jl is licensed under [GPL-2.0-or-later](https://github.com/itchyshin/Metafor.jl/blob/main/LICENSE). The [R `metafor` project](https://www.metafor-project.org/) and its [function documentation](https://wviechtb.github.io/metafor/) are separate projects.

@@ -11,7 +11,7 @@ julia --project=. examples/phylogeny.jl --case=boundary
 julia --project=. examples/phylogeny.jl --case=interior
 ```
 
-The local [comparison page](../assets/generated/comparisons/phylogeny-comparison.html) shows R, Julia, and Python estimates and intervals. These fixtures test software behavior and make no empirical biological claim.
+The local [comparison page](../compare.md) shows R, Julia, and Python estimates and intervals. These fixtures test software behavior and make no empirical biological claim.
 
 ## Provenance
 

@@ -10,7 +10,7 @@ Run the native example from the repository root:
 julia --project=. examples/bcg.jl --case=moderator
 ```
 
-The script reports the latitude coefficient, interval, and predictions at 0°, 30°, and 60°. The local `examples/bcg-comparison.html` page checks the design matrix and coefficient labels along with the estimates.
+The script reports the latitude coefficient, interval, and predictions at 0°, 30°, and 60°. The [comparison index](../compare.md) checks the design matrix and coefficient labels along with the estimates.
 
 ## Data and provenance
 

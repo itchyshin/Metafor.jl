@@ -14,7 +14,7 @@ From the repository root, run:
 julia --project=. examples/phylogeny.jl --case=interior
 ```
 
-The equivalent Python command is `python examples/phylogeny.py --case=interior` in [metafor-py](https://github.com/itchyshin/metafor-py). The shared three-language comparison is [effect-size parity](../assets/generated/comparisons/effect-size-comparison.html); phylogenetic results are in the [phylogeny comparison](../assets/generated/comparisons/phylogeny-comparison.html).
+The equivalent Python command is `python examples/phylogeny.py --case=interior` in [metafor-py](https://github.com/itchyshin/metafor-py). See the [comparison index](../compare.md) for the relevant fixture reports.
 
 ## Interpretation
 

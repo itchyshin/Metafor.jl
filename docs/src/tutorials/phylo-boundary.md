@@ -1,6 +1,6 @@
 # Phylogenetic model at the zero boundary
 
-**Question.** Can the supplied species correlation improve this example?
+Can the supplied species correlation improve this example?
 
 ## Data and model
 
@@ -14,11 +14,11 @@ From the repository root, run:
 julia --project=. examples/phylogeny.jl --case=boundary
 ```
 
-The equivalent Python command is `python examples/phylogeny.py --case=boundary` in [metafor-py](https://github.com/itchyshin/metafor-py). The shared three-language comparison is [effect-size parity](../assets/generated/comparisons/effect-size-comparison.html); phylogenetic results are in the [phylogeny comparison](../assets/generated/comparisons/phylogeny-comparison.html).
+The equivalent Python command is `python examples/phylogeny.py --case=boundary` in [metafor-py](https://github.com/itchyshin/metafor-py). See the [comparison index](../compare.md) for the relevant fixture reports.
 
 ## Interpretation
 
-At the boundary, the estimated shared phylogenetic component contributes no extra variance. This is a software check on a synthetic fixture, not evidence that phylogenetic structure is absent in any biological system.
+At the boundary, the fitted phylogenetic component contributes zero variance. The synthetic observations exercise the software’s handling of that boundary.
 
 ## Scope
 

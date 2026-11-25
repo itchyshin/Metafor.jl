@@ -10,7 +10,7 @@ Run the native example from the repository root:
 julia --project=. examples/bcg.jl --case=models
 ```
 
-The output labels the `fixed` and `random` fits and reports coefficients, standard errors, heterogeneity, and intervals. The local `examples/bcg-comparison.html` page shows each result from R, Julia, and Python with quantity-specific tolerances.
+The output labels the `fixed` and `random` fits and reports coefficients, standard errors, heterogeneity, and intervals. The [comparison index](../compare.md) shows each result from R, Julia, and Python with quantity-specific tolerances.
 
 ## Interpretation
 

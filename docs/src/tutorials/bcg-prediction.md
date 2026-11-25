@@ -10,7 +10,7 @@ Run the native example from the repository root:
 julia --project=. examples/bcg.jl --case=prediction
 ```
 
-The generated results contain predictions, standard errors, confidence limits, and prediction limits. The local three-language comparison checks each prediction field against the pinned reference.
+The generated results contain predictions, standard errors, confidence limits, and prediction limits. The R–Julia comparison report checks each prediction field against the pinned reference.
 
 ## Interpretation
 

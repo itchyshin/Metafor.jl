@@ -18,7 +18,7 @@ The latitude coefficient is the estimated change in log risk ratio per degree. I
 
 The phylogenetic example uses five synthetic observations on three species and a supplied, labelled species-correlation matrix. It includes a zero-boundary case and an interior variance-component case, both checked against pinned R references. These fixtures demonstrate software behavior and make no empirical biological claim.
 
-Run `julia --project=. examples/phylogeny.jl`. From the Python repository, run `OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/compare-phylogeny.py` to fit all three programs and write the local `examples/phylogeny-comparison.html`. The implementation accepts supplied matrices and repeated species; it does not estimate trees or predict effects for unseen species.
+Run `julia --project=. examples/phylogeny.jl`. From the Python repository, run `OPENBLAS_NUM_THREADS=1 .venv/bin/python tools/compare-phylogeny.py` to fit all three programs and write the pairwise comparison report. The implementation accepts supplied matrices and repeated species; it does not estimate trees or predict effects for unseen species.
 
 ## Differences from R metafor
 

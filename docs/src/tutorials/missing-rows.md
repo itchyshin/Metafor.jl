@@ -11,10 +11,10 @@ The BCG fixture and row labels are retained while effect sizes are computed. Non
 From the repository root, run:
 
 ```sh
-julia --project test/runtests.jl effect-sizes
+julia --project test/runtests.jl bcg-edges
 ```
 
-The equivalent Python command is `python -m pytest tests/test_effect_sizes.py -k missing` in [metafor-py](https://github.com/itchyshin/metafor-py). The shared three-language comparison is [effect-size parity](../assets/generated/comparisons/effect-size-comparison.html); phylogenetic results are in the [phylogeny comparison](../assets/generated/comparisons/phylogeny-comparison.html).
+The equivalent Python command is `python -m pytest tests/test_effect_sizes.py tests/test_bcg.py -k missing` in [metafor-py](https://github.com/itchyshin/metafor-py). See the [comparison index](../compare.md) for the relevant fixture reports.
 
 ## Interpretation
 

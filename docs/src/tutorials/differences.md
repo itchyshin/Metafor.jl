@@ -11,4 +11,4 @@ This page links each tutorial to the function-level compatibility record. Status
 
 See [`COMPATIBILITY.md`](../assets/generated/references/COMPATIBILITY.md) for the detailed table. The reference scripts under `reference/` create versioned fixtures and outputs. Julia runs without R.
 
-The local [BCG](../assets/generated/comparisons/bcg-comparison.html), [dependent-effects](../assets/generated/comparisons/dependent-comparison.html), and [phylogeny](../assets/generated/comparisons/phylogeny-comparison.html) artifacts compare R, Julia, and Python results. They are HTML files in this checkout and have not been hosted.
+The [comparison index](../compare.md) links to the BCG, dependent-effects, and phylogeny reports comparing R and Julia results. Their static HTML outputs are linked from the comparison index.

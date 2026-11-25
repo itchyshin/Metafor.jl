@@ -12,7 +12,7 @@ Run the native Julia example from the repository root:
 julia --project=. examples/bcg.jl --case=effects
 ```
 
-The script reads raw counts from the versioned fixture, computes each study effect, and writes results for comparison with R and Python. The local `examples/bcg-comparison.html` page reports differences by output and tolerance.
+The script reads raw counts from the versioned fixture, computes each study effect, and writes results for comparison with R and Python. The [comparison index](../compare.md) reports differences by output and tolerance.
 
 ## Interpretation
 

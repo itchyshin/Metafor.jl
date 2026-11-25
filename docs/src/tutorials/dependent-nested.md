@@ -10,7 +10,7 @@ Run the native Julia example from the repository root:
 julia --project=. examples/dependent.jl --case=nested
 ```
 
-The script fits a REML model with study and nested-effect variance components. The local three-language comparison includes these estimates and coefficient covariance.
+The script fits a REML model with study and nested-effect variance components. The R–Julia comparison report includes these estimates and coefficient covariance.
 
 ## Interpretation
 
