@@ -13,3 +13,6 @@ header { border-bottom-color: var(--mf-line); }
 table { border-color: var(--mf-line); }
 th { background: var(--mf-soft); color: var(--mf-ink); }
 blockquote { border-left: 4px solid var(--mf-accent); padding-left: 1em; }
+
+/* This is a single unversioned site; there is no version list to select. */
+.docs-version-selector { display: none; }
