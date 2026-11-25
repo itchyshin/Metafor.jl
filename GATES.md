@@ -48,3 +48,8 @@ Scope: verify the native Julia port, shared references, tutorials, and mirrored 
   CHECK: cmp examples/effect-size-comparison.html '/Users/z3437171/Dropbox/Github Local/metafor-py/examples/effect-size-comparison.html'
   EXPECT: exit=0
   EVIDENCE: exit=0; shared 232-comparison artifact with the same three-language results.
+
+- [x] G10: three BCG effect scales and correction policies agree with pinned R output
+  CHECK: run native Python and Julia effect-size examples for `--case=all`, `--case=scale`, and `--case=zero-correction`, then run `python tools/compare_effect_sizes.py` in metafor-py
+  EXPECT: EFFECT_SIZE_PARITY_OK checks=316
+  EVIDENCE: max absolute differences effect=3.9968028886505635e-15, model=5.4569682106375694e-12, correction=4.884981308350689e-15; scales RR/OR/RD included.
